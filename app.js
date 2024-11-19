@@ -21,13 +21,13 @@ app.use(logger(formatsLogger));
 
 // Built-in middleware
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.use((req, res, next) => {
-  res.setHeader("Permissions-Policy", "interest-cohort=()");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Permissions-Policy", "interest-cohort=()");
+//   next();
+// });
 
 // Routes
 app.use("/users", userRouter);

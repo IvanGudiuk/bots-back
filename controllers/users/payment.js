@@ -1,13 +1,15 @@
-const { User } = require("../../models/users.js");
+const { User } = require("../../models/pumpModel.js");
+const { Customer } = require("../../models/openInterestModel.js");
+const { Account } = require("../../models/orderbookModel.js");
+const { Volume } = require("../../models/volumesModel.js");
 const axios = require("axios");
 const getPlanAmount = require("../../helpers");
 require("dotenv").config();
 
 const { APIKEY, SHOPID, BASEURL } = process.env;
 
-const check = async (req, res) => {
-  const { _id } = req.user;
-  const { amount, name } = req.body;
+const payment = async (req, res) => {
+  const { userId, monthes, bots, sum } = req.body;
 
   const headers = {
     Authorization: `Token ${APIKEY}`,
@@ -15,7 +17,7 @@ const check = async (req, res) => {
   };
 
   const body = {
-    amount,
+    sum,
     shop_id: SHOPID,
     currency: "USD",
   };
@@ -30,8 +32,28 @@ const check = async (req, res) => {
       const uuid = result.uuid.startsWith("INV-")
         ? result.uuid.substring(4)
         : result.uuid;
-      await User.findByIdAndUpdate(_id, { paymentId: uuid, plan: name });
-      res.status(200).json({ link: result.link });
+      if (bots.includes("pump")) {
+        await User.findByIdAndUpdate(
+          { _id: userId },
+          { paymentId: uuid, monthes }
+        );
+        if (bots.includes("openInterest")) {
+          await Customer.findByIdAndUpdate(
+            { _id: userId },
+            { paymentId: uuid, monthes }
+          );
+          if (bots.includes("orderbook")) {
+            await Account.findByIdAndUpdate(
+              { _id: userId },
+              { paymentId: uuid, monthes }
+            );
+            if (bots.includes("volumes")) {
+              await Volume.findByIdAndUpdate(
+                { _id: userId },
+                { paymentId: uuid, monthes }
+              );
+        res.status(200).json({ link: result.link });
+      }
     } else {
       // Handle unexpected status
       res

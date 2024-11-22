@@ -12,7 +12,7 @@ app.use(logger(formatsLogger));
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://bybit-screeners.online/"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],

@@ -12,6 +12,8 @@ const testSchema = new Schema(
     signals: { type: Array, default: [] },
     informed: { type: Boolean, default: false },
     paid: { type: Boolean, default: true },
+    paymentId: {type: String, default: ''},
+    monthes: {type: Number, default: 0},
     expireTime: {
       type: Date,
       default: () => new Date(Date.now() + 72 * 60 * 60 * 1000), // 24 hours from now

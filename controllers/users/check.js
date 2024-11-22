@@ -19,7 +19,7 @@ const check = async (req, res) => {
     bots.push("pump");
   }
   if (customer) {
-    bots.push("openInterest");
+    bots.push("openinterest");
   }
   if (account) {
     bots.push("orderbook");

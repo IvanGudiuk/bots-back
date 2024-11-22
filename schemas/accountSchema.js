@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const Joi = require("joi");
 
 const acountSchema = new Schema(
   {

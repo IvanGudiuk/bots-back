@@ -15,8 +15,6 @@ const payment = async (req, res) => {
     "Content-Type": "application/json",
   };
 
-  const parsedBots = JSON.parse(bots);
-
   const body = {
     sum,
     shop_id: SHOPID,
@@ -32,25 +30,25 @@ const payment = async (req, res) => {
     const uuid = result.uuid.startsWith("INV-")
       ? result.uuid.substring(4)
       : result.uuid;
-    if (parsedBots.includes("pump")) {
+    if (bots.includes("pump")) {
       await User.findByIdAndUpdate(
         { _id: userId },
         { paymentId: uuid, monthes }
       );
     }
-    if (parsedBots.includes("openinterest")) {
+    if (bots.includes("openinterest")) {
       await Customer.findByIdAndUpdate(
         { _id: userId },
         { paymentId: uuid, monthes }
       );
     }
-    if (parsedBots.includes("orderbook")) {
+    if (bots.includes("orderbook")) {
       await Account.findByIdAndUpdate(
         { _id: userId },
         { paymentId: uuid, monthes }
       );
     }
-    if (parsedBots.includes("volumes")) {
+    if (bots.includes("volumes")) {
       await Volume.findByIdAndUpdate(
         { _id: userId },
         { paymentId: uuid, monthes }

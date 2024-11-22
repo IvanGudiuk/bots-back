@@ -2,15 +2,20 @@ const { RequestError } = require("../helpers/RequestError");
 
 const validateBody = (schema) => {
   const func = (req, res, next) => {
-    if (req.body.bots) {
-      req.body.bots = JSON.parse(req.body.bots);
-    }
+    try {
+      // Ensure bots is always an array
+      if (req.body.bots && typeof req.body.bots === "string") {
+        req.body.bots = JSON.parse(req.body.bots);
+      }
 
-    const { error } = schema.validate(req.body);
-    if (error && Object.keys(req.body).length > 0) {
-      next(RequestError(400, error.message));
+      const { error } = schema.validate(req.body);
+      if (error) {
+        return next(RequestError(400, error.message));
+      }
+      next();
+    } catch (err) {
+      return next(RequestError(400, "Invalid bots format. Must be JSON."));
     }
-    next();
   };
   return func;
 };

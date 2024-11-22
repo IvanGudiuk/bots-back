@@ -44,11 +44,13 @@ const newPaymentSchema = Joi.object({
     "number.base": "sum must be a number",
     "any.required": "sum is required",
   }),
-  bots: Joi.array().items(Joi.string().required()).required().messages({
-    "array.base": "bots must be an array",
-    "array.includesRequiredUnknowns": "bots must be an array of strings",
-    "any.required": "bots is required",
-  }),
+  bots: Joi.array()
+    .items(Joi.string().valid("openinterest", "volume", "trend"))
+    .required()
+    .messages({
+      "array.includes": "Invalid bot name provided",
+      "any.required": "bots is required",
+    }),
 });
 
 module.exports = {

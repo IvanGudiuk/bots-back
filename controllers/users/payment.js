@@ -9,7 +9,7 @@ const { APIKEY, SHOPID, BASEURL } = process.env;
 
 const payment = async (req, res) => {
   const { userId, monthes, bots, sum } = req.body;
-
+  console.log("request body:", userId, monthes, bots, sum);
   const headers = {
     Authorization: `Token ${APIKEY}`,
     "Content-Type": "application/json",

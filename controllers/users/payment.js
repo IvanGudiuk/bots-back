@@ -31,26 +31,26 @@ const payment = async (req, res) => {
       ? result.uuid.substring(4)
       : result.uuid;
     if (bots.includes("pump")) {
-      await User.findByIdAndUpdate(
-        { _id: userId },
+      await User.findOneAndUpdate(
+        { chatId: userId },
         { paymentId: uuid, monthes }
       );
     }
     if (bots.includes("openinterest")) {
       await Customer.findByIdAndUpdate(
-        { _id: userId },
+        { chatId: userId },
         { paymentId: uuid, monthes }
       );
     }
     if (bots.includes("orderbook")) {
       await Account.findByIdAndUpdate(
-        { _id: userId },
+        { chatId: userId },
         { paymentId: uuid, monthes }
       );
     }
     if (bots.includes("volumes")) {
       await Volume.findByIdAndUpdate(
-        { _id: userId },
+        { chatId: userId },
         { paymentId: uuid, monthes }
       );
     }

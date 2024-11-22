@@ -16,13 +16,13 @@ const payment = async (req, res) => {
   };
 
   const body = {
-    sum,
+    amount: sum,
     shop_id: SHOPID,
     currency: "USD",
   };
 
   const response = await axios.post(BASEURL, body, { headers });
-
+  console.log("response.data", response.data);
   // Assuming `response.data` contains the result
   const { status, result } = response.data;
 

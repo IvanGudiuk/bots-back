@@ -45,7 +45,7 @@ const newPaymentSchema = Joi.object({
     "any.required": "sum is required",
   }),
   bots: Joi.array()
-    .items(Joi.string().valid("openinterest", "volume", "trend"))
+    .items(Joi.string().valid("openinterest", "volume", "trend", "pump"))
     .required()
     .messages({
       "array.includes": "Invalid bot name provided",

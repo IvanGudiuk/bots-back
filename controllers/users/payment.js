@@ -37,19 +37,19 @@ const payment = async (req, res) => {
       );
     }
     if (bots.includes("openinterest")) {
-      await Customer.findByIdAndUpdate(
+      await Customer.findOneAndUpdate(
         { chatId: Number(userId) },
         { paymentId: uuid, monthes }
       );
     }
     if (bots.includes("orderbook")) {
-      await Account.findByIdAndUpdate(
+      await Account.findOneAndUpdate(
         { chatId: Number(userId) },
         { paymentId: uuid, monthes }
       );
     }
     if (bots.includes("volumes")) {
-      await Volume.findByIdAndUpdate(
+      await Volume.findOneAndUpdate(
         { chatId: Number(userId) },
         { paymentId: uuid, monthes }
       );

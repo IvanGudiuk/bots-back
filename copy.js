@@ -32,20 +32,30 @@ const payment = async (req, res) => {
       const uuid = result.uuid.startsWith("INV-")
         ? result.uuid.substring(4)
         : result.uuid;
-      let updateParams = { paymentId: uuid, monthes: Number(monthes) };
       if (bots.includes("pump")) {
-        updateParams.pump = true;
+        await User.updateOne(
+          { chatId: Number(userId) }, // Filter
+          { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
+        );
       }
       if (bots.includes("openinterest")) {
-        updateParams.openinterest = true;
+        await Customer.updateOne(
+          { chatId: Number(userId) }, // Filter
+          { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
+        );
       }
       if (bots.includes("orderbook")) {
-        updateParams.orderbook = true;
+        await Account.updateOne(
+          { chatId: Number(userId) }, // Filter
+          { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
+        );
       }
       if (bots.includes("volumes")) {
-        updateParams.volumes = true;
+        await Volume.updateOne(
+          { chatId: Number(userId) }, // Filter
+          { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
+        );
       }
-      await Subscribe.findOneAndUpdate({ chatId: userId }, updateParams);
       res.status(200).json({ link: result.link });
     } else {
       // Handle unexpected status

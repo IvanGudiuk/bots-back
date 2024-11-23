@@ -17,7 +17,11 @@ const postback = async (req, res) => {
     const customer = await Customer.findOne({ paymentId: id });
     const account = await Account.findOne({ paymentId: id });
     const volume = await Volume.findOne({ paymentId: id });
-    if (user && user?.monthes > 0) {
+    console.log("user", user);
+    console.log("customer", customer);
+    console.log("account", account);
+    console.log("volume", volume);
+    if (user && Number(user?.monthes) > 0) {
       const expireTime = new Date(
         Date.now() + Number(user.monthes) * 30 * 24 * 60 * 60 * 1000
       );
@@ -31,7 +35,7 @@ const postback = async (req, res) => {
       });
     }
 
-    if (account && account?.monthes > 0) {
+    if (account && Number(account?.monthes) > 0) {
       const expireTime = new Date(
         Date.now() + Number(account.monthes) * 30 * 24 * 60 * 60 * 1000
       );
@@ -46,7 +50,7 @@ const postback = async (req, res) => {
       });
     }
 
-    if (customer && customer?.monthes > 0) {
+    if (customer && Number(customer?.monthes) > 0) {
       console.log("customer", customer);
       console.log("customer.monthes", customer.monthes);
       const expireTime = new Date(
@@ -62,7 +66,7 @@ const postback = async (req, res) => {
       });
     }
 
-    if (volume && volume?.monthes > 0) {
+    if (volume && Number(volume?.monthes) > 0) {
       const expireTime = new Date(
         Date.now() + Number(volume.monthes) * 30 * 24 * 60 * 60 * 1000
       );

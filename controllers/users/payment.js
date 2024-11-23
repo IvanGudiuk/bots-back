@@ -46,11 +46,13 @@ const payment = async (req, res) => {
         updateParams.volumes = true;
       }
 
-      await Subscribe.findOneAndUpdate(
+      const subscribe = await Subscribe.findOneAndUpdate(
         { chatId: userId }, // Search criteria
         { $set: updateParams }, // Update fields
         { upsert: true, new: true } // Create if not found, return the updated document
       );
+
+      console.log("subscribe", subscribe);
 
       res.status(200).json({ link: result.link });
     } else {

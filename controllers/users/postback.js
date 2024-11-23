@@ -30,10 +30,13 @@ const postback = async (req, res) => {
       }
 
       if (subscriber.openinterest) {
-        await Customer.findOneAndUpdate(
+        const customer = await Customer.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime }
+          { newExpireTime },
+          { new: true }
         );
+
+        console.log("customer", customer);
       }
 
       if (subscriber.orderbook) {

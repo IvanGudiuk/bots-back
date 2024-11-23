@@ -17,7 +17,7 @@ const postback = async (req, res) => {
     const volume = await Volume.findOne({ paymentId: id });
     if (user && user?.monthes > 0) {
       const expireTime = new Date(
-        Date.now() + Number(user.monthes) * 24 * 60 * 60 * 1000
+        Date.now() + Number(user.monthes) * 30 * 24 * 60 * 60 * 1000
       );
       await User.findByIdAndUpdate(user._id, {
         expireTime,
@@ -31,7 +31,7 @@ const postback = async (req, res) => {
 
     if (account && account?.monthes > 0) {
       const expireTime = new Date(
-        Date.now() + Number(account.monthes) * 24 * 60 * 60 * 1000
+        Date.now() + Number(account.monthes) * 30 * 24 * 60 * 60 * 1000
       );
       await Account.findByIdAndUpdate(account._id, {
         expireTime,
@@ -47,7 +47,7 @@ const postback = async (req, res) => {
       console.log("customer", customer);
       console.log("customer.monthes", customer.monthes);
       const expireTime = new Date(
-        Date.now() + Number(customer.monthes) * 24 * 60 * 60 * 1000
+        Date.now() + Number(customer.monthes) * 30 * 24 * 60 * 60 * 1000
       );
       await Customer.findByIdAndUpdate(customer._id, {
         expireTime,
@@ -61,7 +61,7 @@ const postback = async (req, res) => {
 
     if (volume && volume?.monthes > 0) {
       const expireTime = new Date(
-        Date.now() + Number(volume.monthes) * 24 * 60 * 60 * 1000
+        Date.now() + Number(volume.monthes) * 30 * 24 * 60 * 60 * 1000
       );
       await Volume.findByIdAndUpdate(volume._id, {
         expireTime,

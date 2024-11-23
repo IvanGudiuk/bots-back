@@ -2,7 +2,7 @@ const { Schema } = require("mongoose");
 
 const customerSchema = new Schema(
   {
-    chatId: { type: Number, default: null, unique: true },
+    chatId: { type: Number, default: null },
     name: {
       type: String,
       required: true,

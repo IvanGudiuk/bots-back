@@ -30,9 +30,9 @@ const payment = async (req, res) => {
       ? result.uuid.substring(4)
       : result.uuid;
     if (bots.includes("pump")) {
-      await User.findOneAndUpdate(
-        { chatId: Number(userId) },
-        { paymentId: uuid, monthes: Number(monthes) }
+      await User.updateOne(
+        { chatId: Number(userId) }, // Filter
+        { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
       );
     }
     if (bots.includes("openinterest")) {

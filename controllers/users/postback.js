@@ -19,10 +19,7 @@ const postback = async (req, res) => {
       Account.findOne({ paymentId: id }),
       Volume.findOne({ paymentId: id }),
     ]);
-    console.log("user", user);
-    console.log("customer", customer);
-    console.log("account", account);
-    console.log("volume", volume);
+
     if (user && Number(user?.monthes) > 0) {
       const expireTime = new Date(
         Date.now() + Number(user.monthes) * 30 * 24 * 60 * 60 * 1000

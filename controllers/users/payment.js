@@ -36,23 +36,21 @@ const payment = async (req, res) => {
       );
     }
     if (bots.includes("openinterest")) {
-      console.log("bots", bots);
-      console.log("userId", userId);
-      await Customer.findOneAndUpdate(
-        { chatId: Number(userId) },
-        { paymentId: uuid, monthes: Number(monthes) }
+      await Customer.updateOne(
+        { chatId: Number(userId) }, // Filter
+        { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
       );
     }
     if (bots.includes("orderbook")) {
-      await Account.findOneAndUpdate(
-        { chatId: Number(userId) },
-        { paymentId: uuid, monthes: Number(monthes) }
+      await Account.updateOne(
+        { chatId: Number(userId) }, // Filter
+        { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
       );
     }
     if (bots.includes("volumes")) {
-      await Volume.findOneAndUpdate(
-        { chatId: Number(userId) },
-        { paymentId: uuid, monthes: Number(monthes) }
+      await Volume.updateOne(
+        { chatId: Number(userId) }, // Filter
+        { $set: { paymentId: uuid, monthes: Number(monthes) } } // Update
       );
     }
     res.status(200).json({ link: result.link });

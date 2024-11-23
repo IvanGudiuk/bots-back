@@ -13,10 +13,12 @@ const postback = async (req, res) => {
   console.log("token", token);
   console.log("id", id);
   if (id) {
-    const user = await User.findOne({ paymentId: id });
-    const customer = await Customer.findOne({ paymentId: id });
-    const account = await Account.findOne({ paymentId: id });
-    const volume = await Volume.findOne({ paymentId: id });
+    const [user, customer, account, volume] = await Promise.all([
+      User.findOne({ paymentId: id }),
+      Customer.findOne({ paymentId: id }),
+      Account.findOne({ paymentId: id }),
+      Volume.findOne({ paymentId: id }),
+    ]);
     console.log("user", user);
     console.log("customer", customer);
     console.log("account", account);
@@ -39,7 +41,7 @@ const postback = async (req, res) => {
       const expireTime = new Date(
         Date.now() + Number(account.monthes) * 30 * 24 * 60 * 60 * 1000
       );
-      console.log("expireTime", expireTime);
+
       await Account.findByIdAndUpdate(account._id, {
         expireTime,
         paid: true,
@@ -53,9 +55,11 @@ const postback = async (req, res) => {
     if (customer && Number(customer?.monthes) > 0) {
       console.log("customer", customer);
       console.log("customer.monthes", customer.monthes);
+
       const expireTime = new Date(
         Date.now() + Number(customer.monthes) * 30 * 24 * 60 * 60 * 1000
       );
+      console.log("expireTime", expireTime);
       await Customer.findByIdAndUpdate(customer._id, {
         expireTime,
         paid: true,

@@ -10,6 +10,8 @@ const { SECRETKEY } = process.env;
 const postback = async (req, res) => {
   const { token } = req.body;
   const { id } = jwt.verify(token, SECRETKEY);
+  console.log("token", token);
+  console.log("id", id);
   if (id) {
     const user = await User.findOne({ paymentId: id });
     const customer = await Customer.findOne({ paymentId: id });

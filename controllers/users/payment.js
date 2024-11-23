@@ -3,7 +3,7 @@ const { Customer } = require("../../models/openInterestModel.js");
 const { Account } = require("../../models/orderbookModel.js");
 const { Volume } = require("../../models/volumesModel.js");
 const { Subscribe } = require("../../models/subscribeModel.js");
-const RequestError = require("../helpers/RequestError");
+const RequestError = require("../../helpers/RequestError");
 const axios = require("axios");
 require("dotenv").config();
 

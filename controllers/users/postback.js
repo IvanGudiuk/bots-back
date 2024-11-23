@@ -22,7 +22,7 @@ const postback = async (req, res) => {
       await User.findByIdAndUpdate(user._id, {
         expireTime,
         paid: true,
-        informed: false,
+        informed: true,
         selectedValue: "paid",
         paymentId: "",
         monthes: 0,

@@ -20,7 +20,7 @@ const postback = async (req, res) => {
       const newTime = new Date(
         Date.now() + Number(subscriber.monthes) * 30 * 24 * 60 * 60 * 1000
       );
-      console.log("expireTime", expireTime);
+      // console.log("expireTime", expireTime);
 
       if (subscriber.pump) {
         await User.findOneAndUpdate(
@@ -32,7 +32,7 @@ const postback = async (req, res) => {
       if (subscriber.openinterest) {
         const customer = await Customer.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { $set: { newExpireTime: expireTime } }
+          { $set: { newExpireTime: newTime } }
         );
         console.log("customer", customer);
       }
@@ -40,14 +40,14 @@ const postback = async (req, res) => {
       if (subscriber.orderbook) {
         await Account.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime: expireTime }
+          { newExpireTime: newTime }
         );
       }
 
       if (subscriber.volumes) {
         await Volume.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime: expireTime }
+          { newExpireTime: newTime }
         );
       }
 

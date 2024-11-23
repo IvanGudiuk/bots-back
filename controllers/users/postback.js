@@ -17,7 +17,7 @@ const postback = async (req, res) => {
     const subscriber = await Subscribe.findOne({ paymentId: id });
     console.log("subscriber", subscriber);
     if (subscriber && Number(subscriber?.monthes) > 0) {
-      const expireTime = new Date(
+      const newTime = new Date(
         Date.now() + Number(subscriber.monthes) * 30 * 24 * 60 * 60 * 1000
       );
       console.log("expireTime", expireTime);
@@ -25,14 +25,14 @@ const postback = async (req, res) => {
       if (subscriber.pump) {
         await User.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime: expireTime }
+          { newExpireTime: newTime }
         );
       }
 
       if (subscriber.openinterest) {
         const customer = await Customer.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { $set: { expireTime: expireTime } }
+          { $set: { newExpireTime: expireTime } }
         );
         console.log("customer", customer);
       }

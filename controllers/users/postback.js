@@ -32,7 +32,7 @@ const postback = async (req, res) => {
       if (subscriber.openinterest) {
         const customer = await Customer.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime: expireTime }
+          { $set: { expireTime: expireTime } }
         );
         console.log("customer", customer);
       }

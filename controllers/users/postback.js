@@ -44,6 +44,8 @@ const postback = async (req, res) => {
     }
 
     if (customer && customer?.monthes > 0) {
+      console.log("customer", customer);
+      console.log("customer.monthes", customer.monthes);
       const expireTime = new Date(
         Date.now() + Number(customer.monthes) * 24 * 60 * 60 * 1000
       );

@@ -11,7 +11,7 @@ const postback = async (req, res) => {
   const { token } = req.body;
   const { id } = jwt.verify(token, SECRETKEY);
   console.log("token", token);
-  console.log("id", id);
+  console.log("id", id, typeof id);
   if (id) {
     const [user, customer, account, volume] = await Promise.all([
       User.findOne({ paymentId: id }),

@@ -6,6 +6,7 @@ require("dotenv").config();
 const { DB_HOST, PORT = 3000 } = process.env;
 
 mongoose.set("strictQuery", true);
+mongoose.set("autoIndex", false);
 
 mongoose.connect(DB_HOST).then(() => {
   const server = http.createServer(app);

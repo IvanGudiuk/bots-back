@@ -20,6 +20,7 @@ const postback = async (req, res) => {
       const expireTime = new Date(
         Date.now() + Number(subscriber.monthes) * 30 * 24 * 60 * 60 * 1000
       );
+      console.log("expireTime", expireTime);
 
       if (subscriber.pump) {
         await User.findOneAndUpdate(

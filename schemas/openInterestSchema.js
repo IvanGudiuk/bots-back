@@ -25,9 +25,13 @@ const customerSchema = new Schema(
     },
     paymentId: { type: String, default: "" },
     monthes: { type: Number, default: 0 },
+    newExpireTime: {
+      type: Date,
+      default: () => new Date(Date.now() - 5 * 1000),
+    },
     expireTime: {
       type: Date,
-      default: () => new Date(Date.now() + 5 * 1000),
+      default: () => new Date(Date.now()),
       // default: () => new Date(Date.now() + 72 * 60 * 60 * 1000),
     },
   },

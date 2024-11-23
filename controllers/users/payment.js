@@ -52,8 +52,6 @@ const payment = async (req, res) => {
         { upsert: true, new: true } // Create if not found, return the updated document
       );
 
-      console.log("subscribe", subscribe);
-
       res.status(200).json({ link: result.link });
     } else {
       // Handle unexpected status

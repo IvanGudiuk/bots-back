@@ -35,6 +35,7 @@ const postback = async (req, res) => {
       const expireTime = new Date(
         Date.now() + Number(account.monthes) * 30 * 24 * 60 * 60 * 1000
       );
+      console.log("expireTime", expireTime);
       await Account.findByIdAndUpdate(account._id, {
         expireTime,
         paid: true,

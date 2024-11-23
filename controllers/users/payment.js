@@ -22,7 +22,6 @@ const payment = async (req, res) => {
   };
 
   const response = await axios.post(BASEURL, body, { headers });
-  console.log("response.data", response.data);
   // Assuming `response.data` contains the result
   const { status, result } = response.data;
 
@@ -37,6 +36,8 @@ const payment = async (req, res) => {
       );
     }
     if (bots.includes("openinterest")) {
+      console.log("bots", bots);
+      console.log("userId", userId);
       await Customer.findOneAndUpdate(
         { chatId: Number(userId) },
         { paymentId: uuid, monthes: Number(monthes) }

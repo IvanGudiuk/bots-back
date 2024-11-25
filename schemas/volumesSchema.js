@@ -11,6 +11,8 @@ const volumeSchema = new Schema(
       type: String,
       default: null,
     },
+    grow: { type: Number, default: 300 },
+    timeframe: { type: Number, default: 15 },
     informed: {
       type: Boolean,
       default: false,
@@ -19,11 +21,13 @@ const volumeSchema = new Schema(
       type: Boolean,
       default: true,
     },
-    paymentId: { type: String, default: "" },
-    monthes: { type: Number, default: 0 },
+    newExpireTime: {
+      type: Date,
+      default: Date.now(), // 24 hours from now
+    },
     expireTime: {
       type: Date,
-      default: () => new Date(Date.now() + 72 * 60 * 60 * 1000),
+      default: Date.now(), // 24 hours from now
     },
   },
   { versionKey: false, timestamps: false }

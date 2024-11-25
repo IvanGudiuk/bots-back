@@ -15,7 +15,7 @@ const postback = async (req, res) => {
   console.log("id", id, typeof id);
   if (id) {
     const subscriber = await Subscribe.findOne({ paymentId: id });
-    console.log("subscriber", subscriber);
+
     if (subscriber && Number(subscriber?.monthes) > 0) {
       const newExpireTime = new Date(
         Date.now() + Number(subscriber.monthes) * 30 * 24 * 60 * 60 * 1000
@@ -30,13 +30,10 @@ const postback = async (req, res) => {
       }
 
       if (subscriber.openinterest) {
-        const customer = await Customer.findOneAndUpdate(
+        await Customer.findOneAndUpdate(
           { chatId: subscriber.chatId },
-          { newExpireTime },
-          { new: true }
+          { newExpireTime }
         );
-
-        console.log("customer", customer);
       }
 
       if (subscriber.orderbook) {

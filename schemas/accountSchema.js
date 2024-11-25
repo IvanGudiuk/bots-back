@@ -23,9 +23,13 @@ const acountSchema = new Schema(
     },
     paymentId: { type: String, default: "" },
     monthes: { type: Number, default: 0 },
+    newExpireTime: {
+      type: Date,
+      default: Date.now(), // 24 hours from now
+    },
     expireTime: {
       type: Date,
-      default: () => new Date(Date.now() + 72 * 60 * 60 * 1000), // 24 hours from now
+      default: Date.now(), // 24 hours from now
     },
   },
   { versionKey: false, timestamps: false }

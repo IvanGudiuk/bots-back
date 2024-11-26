@@ -42,7 +42,7 @@ const payment = async (req, res) => {
       if (bots.includes("orderbook")) {
         updateParams.orderbook = true;
       }
-      if (bots.includes("volumes")) {
+      if (bots.includes("volume")) {
         updateParams.volumes = true;
       }
 

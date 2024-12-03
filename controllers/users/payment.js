@@ -32,7 +32,16 @@ const payment = async (req, res) => {
       const uuid = result.uuid.startsWith("INV-")
         ? result.uuid.substring(4)
         : result.uuid;
-      let updateParams = { paymentId: uuid, monthes: Number(monthes) };
+
+      let updateParams = {
+        paymentId: uuid,
+        monthes: Number(monthes),
+        pump: false,
+        openinterest: false,
+        orderbook: false,
+        volumes: false,
+      };
+
       if (bots.includes("pump")) {
         updateParams.pump = true;
       }

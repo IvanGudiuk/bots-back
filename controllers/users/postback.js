@@ -11,8 +11,8 @@ const { SECRETKEY } = process.env;
 const postback = async (req, res) => {
   const { token } = req.body;
   const { id } = jwt.verify(token, SECRETKEY);
-  console.log("token", token);
-  console.log("id", id, typeof id);
+  // console.log("token", token);
+  // console.log("id", id, typeof id);
   if (id) {
     const subscriber = await Subscribe.findOne({ paymentId: id });
 

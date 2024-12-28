@@ -12,7 +12,7 @@ app.use(logger(formatsLogger));
 
 app.use(
   cors({
-    origin: "https://dolphin-app-dmd28.ondigitalocean.app/",
+    origin: "https://dolphin-app-dmd28.ondigitalocean.app",
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
